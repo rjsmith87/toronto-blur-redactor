@@ -1,0 +1,40 @@
+openapi: 3.0.3
+info:
+  title: Toronto Image Redaction API
+  version: "1.0"
+paths:
+  /redact:
+    post:
+      summary: Redact an uploaded image
+      operationId: redactImage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageUrl:
+                  type: string
+                imageBase64:
+                  type: string
+                metadata:
+                  type: object
+      responses:
+        "200":
+          description: Redacted image result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  redacted:
+                    type: boolean
+                  method:
+                    type: string
+                  receivedMetadataKeys:
+                    type: array
+                    items:
+                      type: string
+                  note:
+                    type: string
