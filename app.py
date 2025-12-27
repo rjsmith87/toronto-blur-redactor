@@ -224,3 +224,43 @@ def index():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+
+# --- Agentforce Chat Integration ---
+import requests
+
+SF_INSTANCE_URL = os.environ.get('SF_INSTANCE_URL')
+SF_ACCESS_TOKEN = os.environ.get('SF_ACCESS_TOKEN')
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    """Send message to Austin via Apex REST"""
+    data = request.get_json()
+    message = data.get('message', '')
+    session_id = data.get('sessionId')
+    
+    url = f"{SF_INSTANCE_URL}/services/apexrest/austin"
+    
+    headers = {
+        'Authorization': f'Bearer {SF_ACCESS_TOKEN}',
+        'Content-Type': 'application/json'
+    }
+    
+    payload = {
+        'action': 'chat',
+        'message': message,
+        'sessionId': session_id
+    }
+    
+    try:
+        response = requests.post(url, headers=headers, json=payload, timeout=30)
+        if response.status_code == 200:
+            import json
+            result = response.json()
+            if isinstance(result, str):
+                result = json.loads(result)
+            return jsonify(result)
+        else:
+            return jsonify({'success': False, 'error': f'Salesforce error: {response.status_code}'}), 500
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
