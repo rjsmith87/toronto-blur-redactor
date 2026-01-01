@@ -104,6 +104,36 @@ def upload_image_to_salesforce(image_base64, filename="311_photo.jpg"):
     return None
 
 
+def invoke_analyze_photo_flow(content_doc_id):
+    """Call the Analyze 311 Photo Flow via Salesforce REST API."""
+    access_token, instance_url = get_sf_access_token()
+    
+    url = f"{instance_url}/services/data/v62.0/actions/custom/flow/Analyze_311_Photo_Flow"
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json'
+    }
+    
+    payload = {
+        'inputs': [{
+            'ContentDocumentId': content_doc_id
+        }]
+    }
+    
+    print(f'🔍 Calling Analyze 311 Photo Flow for {content_doc_id}...')
+    resp = requests.post(url, headers=headers, json=payload, timeout=60)
+    
+    if resp.status_code == 200:
+        result = resp.json()
+        if result and len(result) > 0 and 'outputValues' in result[0]:
+            analysis = result[0]['outputValues'].get('AnalysisResult', '')
+            print(f'✓ Flow returned analysis')
+            return analysis
+        print(f'⚠ Flow returned unexpected format: {result}')
+        return None
+    
+    print(f'⚠ Flow call failed: {resp.status_code} - {resp.text}')
+    return None
 
 
 # --- Model Loading ---
@@ -335,8 +365,14 @@ def chat():
             print('📷 Uploading image to Salesforce...')
             content_doc_id = upload_image_to_salesforce(image_base64)
             if content_doc_id:
-                message = f"{message}\n\n[Photo uploaded. ContentDocumentId: {content_doc_id}. Use the Analyze 311 Photo Flow action to analyze this photo.]"
-                print('✓ Image uploaded, added to message context')
+                # Call the Flow directly to analyze the photo
+                analysis = invoke_analyze_photo_flow(content_doc_id)
+                if analysis:
+                    message = f"{message}\n\n[Photo Analysis Result]\n{analysis}\n\nContentDocumentId: {content_doc_id}"
+                    print('✓ Image analyzed, added to message context')
+                else:
+                    message = f"{message}\n\n[Photo uploaded but analysis failed. ContentDocumentId: {content_doc_id}]"
+                    print('⚠ Image uploaded but flow analysis failed')
             else:
                 print('⚠ Image upload failed, continuing without image')
         
