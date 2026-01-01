@@ -17,7 +17,7 @@ import numpy as np
 import onnxruntime as ort
 import requests
 from flask import Flask, jsonify, request, send_from_directory
-from PIL import Image
+from PIL import Image, ImageOps
 import mediapipe as mp
 
 app = Flask(__name__, static_folder="static", static_url_path="")
@@ -382,7 +382,9 @@ def redact():
             return jsonify({"error": "Missing imageBase64 field"}), 400
         
         image_data = base64.b64decode(data["imageBase64"])
-        pil_image = Image.open(BytesIO(image_data)).convert("RGB")
+        pil_image = Image.open(BytesIO(image_data))
+        pil_image = ImageOps.exif_transpose(pil_image)
+        pil_image = pil_image.convert("RGB")
         image_rgb = np.array(pil_image)
         image_bgr = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2BGR)
         
@@ -424,7 +426,9 @@ def chat():
             print('📷 Processing image...')
             
             image_data = base64.b64decode(image_base64)
-            pil_image = Image.open(BytesIO(image_data)).convert("RGB")
+            pil_image = Image.open(BytesIO(image_data))
+        pil_image = ImageOps.exif_transpose(pil_image)
+        pil_image = pil_image.convert("RGB")
             image_rgb = np.array(pil_image)
             image_bgr = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2BGR)
             
