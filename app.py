@@ -66,6 +66,44 @@ def get_sf_access_token():
     
     print(f"✓ Got new Salesforce token")
     return _sf_token_cache['token'], _sf_token_cache['instance_url']
+def upload_image_to_salesforce(image_base64, filename="311_photo.jpg"):
+    """Upload image to Salesforce as ContentDocument, return ContentDocumentId."""
+    access_token, instance_url = get_sf_access_token()
+    
+    url = f"{instance_url}/services/data/v59.0/sobjects/ContentVersion"
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json'
+    }
+    
+    payload = {
+        'Title': f'311_Report_{int(time.time())}',
+        'PathOnClient': filename,
+        'VersionData': image_base64
+    }
+    
+    resp = requests.post(url, headers=headers, json=payload)
+    
+    if resp.status_code not in [200, 201]:
+        print(f"ContentVersion upload failed: {resp.text}")
+        return None
+    
+    content_version_id = resp.json().get('id')
+    print(f"✓ Created ContentVersion: {content_version_id}")
+    
+    query_url = f"{instance_url}/services/data/v59.0/query"
+    query = f"SELECT ContentDocumentId FROM ContentVersion WHERE Id = '{content_version_id}'"
+    
+    resp = requests.get(query_url, headers={'Authorization': f'Bearer {access_token}'}, params={'q': query})
+    
+    if resp.status_code == 200 and resp.json().get('records'):
+        content_doc_id = resp.json()['records'][0]['ContentDocumentId']
+        print(f"✓ ContentDocumentId: {content_doc_id}")
+        return content_doc_id
+    
+    return None
+
+
 
 
 # --- Model Loading ---
