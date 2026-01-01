@@ -335,7 +335,7 @@ def chat():
             print('📷 Uploading image to Salesforce...')
             content_doc_id = upload_image_to_salesforce(image_base64)
             if content_doc_id:
-                message = f"{message}\n\n[Photo uploaded - ContentDocumentId: {content_doc_id}. Please analyze this image using the Analyze_311_Photo action.]"
+                message = f"{message}\n\n[Photo uploaded. ContentDocumentId: {content_doc_id}. Use the Analyze 311 Photo Flow action to analyze this photo.]"
                 print('✓ Image uploaded, added to message context')
             else:
                 print('⚠ Image upload failed, continuing without image')
