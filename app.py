@@ -383,8 +383,8 @@ def redact():
         
         image_data = base64.b64decode(data["imageBase64"])
         pil_image = Image.open(BytesIO(image_data))
-        pil_image = ImageOps.exif_transpose(pil_image)
-        pil_image = pil_image.convert("RGB")
+            pil_image = ImageOps.exif_transpose(pil_image)
+            pil_image = pil_image.convert("RGB")
         image_rgb = np.array(pil_image)
         image_bgr = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2BGR)
         
@@ -427,8 +427,8 @@ def chat():
             
             image_data = base64.b64decode(image_base64)
             pil_image = Image.open(BytesIO(image_data))
-        pil_image = ImageOps.exif_transpose(pil_image)
-        pil_image = pil_image.convert("RGB")
+            pil_image = ImageOps.exif_transpose(pil_image)
+            pil_image = pil_image.convert("RGB")
             image_rgb = np.array(pil_image)
             image_bgr = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2BGR)
             
