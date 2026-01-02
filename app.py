@@ -352,7 +352,7 @@ def apply_blur(image_bgr, regions):
             roi = image_bgr[y1:y2, x1:x2]
             # Kernel proportional to region size, minimum 99
             region_size = max(x2 - x1, y2 - y1)
-            kernel = max(99, region_size // 2)
+            kernel = max(151, region_size // 2)
             kernel = kernel if kernel % 2 == 1 else kernel + 1  # must be odd
             blurred = cv2.GaussianBlur(roi, (kernel, kernel), 0)
             image_bgr[y1:y2, x1:x2] = blurred
