@@ -346,15 +346,17 @@ def detect_faces(image_rgb):
     return faces
 
 
-def apply_blur(image_bgr, regions, blur_strength=99):
+def apply_blur(image_bgr, regions):
     for (x1, y1, x2, y2) in regions:
         if x2 > x1 and y2 > y1:
             roi = image_bgr[y1:y2, x1:x2]
-            blurred = cv2.GaussianBlur(roi, (blur_strength, blur_strength), 0)
+            # Kernel proportional to region size, minimum 99
+            region_size = max(x2 - x1, y2 - y1)
+            kernel = max(99, region_size // 2)
+            kernel = kernel if kernel % 2 == 1 else kernel + 1  # must be odd
+            blurred = cv2.GaussianBlur(roi, (kernel, kernel), 0)
             image_bgr[y1:y2, x1:x2] = blurred
     return image_bgr
-
-
 # --- Routes ---
 
 @app.route("/")
