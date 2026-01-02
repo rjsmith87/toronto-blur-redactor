@@ -917,7 +917,7 @@
 
     <script>
         let selectedImage = null;
-        let redactedImageBase64 = null;
+        let redactedBase64 = null;
 
         function toggleChat() {
             const widget = document.getElementById('chatWidget');
@@ -956,9 +956,9 @@
                     
                     const data = await response.json();
                     
-                    if (data.redactedImageBase64) {
-                        redactedImageBase64 = data.redactedImageBase64;
-                        document.getElementById('previewImg').src = 'data:image/jpeg;base64,' + redactedImageBase64;
+                    if (data.redactedBase64) {
+                        redactedBase64 = data.redactedBase64;
+                        document.getElementById('previewImg').src = 'data:image/jpeg;base64,' + redactedBase64;
                         
                         // Show blur stats if any
                         const blurInfo = [];
@@ -970,7 +970,7 @@
                         }
                     } else {
                         // No redaction needed or error, use original
-                        redactedImageBase64 = base64;
+                        redactedBase64 = base64;
                         document.getElementById('previewImg').src = e.target.result;
                     }
                     
@@ -978,7 +978,7 @@
                 } catch (error) {
                     console.error('Redaction error:', error);
                     // Fall back to original image
-                    redactedImageBase64 = base64;
+                    redactedBase64 = base64;
                     document.getElementById('previewImg').src = e.target.result;
                     document.getElementById('imagePreview').classList.add('active');
                 }
@@ -990,7 +990,7 @@
 
         function removeImage() {
             selectedImage = null;
-            redactedImageBase64 = null;
+            redactedBase64 = null;
             document.getElementById('imageInput').value = '';
             document.getElementById('imagePreview').classList.remove('active');
         }
@@ -999,7 +999,7 @@
             const input = document.getElementById('messageInput');
             const message = input.value.trim();
             
-            if (!message && !redactedImageBase64) return;
+            if (!message && !redactedBase64) return;
             
             const messagesContainer = document.getElementById('chatMessages');
             
@@ -1008,15 +1008,15 @@
             userMsg.className = 'message user';
             
             let userContent = message;
-            if (redactedImageBase64) {
-                userContent += (message ? '<br>' : '') + '<img src="data:image/jpeg;base64,' + redactedImageBase64 + '" alt="Uploaded image">';
+            if (redactedBase64) {
+                userContent += (message ? '<br>' : '') + '<img src="data:image/jpeg;base64,' + redactedBase64 + '" alt="Uploaded image">';
             }
             userMsg.innerHTML = userContent || 'Image attached';
             messagesContainer.appendChild(userMsg);
             
             // Clear input
             input.value = '';
-            const imageToSend = redactedImageBase64;
+            const imageToSend = redactedBase64;
             removeImage();
             
             // Scroll to bottom
