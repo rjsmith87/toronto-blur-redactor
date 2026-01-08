@@ -519,7 +519,7 @@ def chat():
             all_regions = faces + plates + fallback_heads
             if all_regions:
                 image_bgr = apply_blur(image_bgr, all_regions)
-                print(f'✓ Redacted {len(faces)} faces, {len(plates)} plates')
+                print(f'✓ Redacted {len(faces)} faces, {len(plates)} plates, {len(fallback_heads)} fallback heads')
             
             _, buffer = cv2.imencode(".jpg", image_bgr, [cv2.IMWRITE_JPEG_QUALITY, 90])
             redacted_b64 = base64.b64encode(buffer).decode("utf-8")
