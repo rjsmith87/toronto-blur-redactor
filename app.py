@@ -304,7 +304,7 @@ def detect_persons(image_bgr):
         class_id = np.argmax(class_scores)
         confidence = class_scores[class_id]
         
-        if confidence < 0.25 or class_id != PERSON_CLASS:
+        if confidence < 0.15 or class_id != PERSON_CLASS:
             continue
         
         x1 = int((x_c - bw / 2 - pad_x) / scale)
