@@ -198,7 +198,7 @@ def parse_create_case_block(text):
 
 # --- Model Loading ---
 mp_face = mp.solutions.face_detection
-face_detector = mp_face.FaceDetection(model_selection=1, min_detection_confidence=0.3)
+face_detector = mp_face.FaceDetection(model_selection=1, min_detection_confidence=0.2)
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "yolov8n.onnx")
 PLATE_MODEL_PATH = os.path.join(os.path.dirname(__file__), "plate_detect.onnx")
