@@ -1029,8 +1029,21 @@
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
             
             try {
+            // Retry helper for Agentforce cold starts
+            const fetchWithRetry = async (url, options, retries = 2) => {
+                for (let i = 0; i <= retries; i++) {
+                    try {
+                        const response = await fetch(url, options);
+                        if (response.ok || i === retries) return response;
+                    } catch (e) {
+                        if (i === retries) throw e;
+                    }
+                    await new Promise(r => setTimeout(r, 2000));
+                }
+            };
+
                 // Send to chat endpoint
-                const response = await fetch('/api/chat', {
+                const response = await fetchWithRetry('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
