@@ -16,3 +16,9 @@ The AI is grounded using official **Toronto 311 Open Data**.
 - `heroku/`: ML Orchestration Layer.
 - `force-app/`: Salesforce Metadata (Flows, Apex, Objects).
 - `scripts/`: Data transformation logic.
+
+## 📐 Technical Deep Dive: Privacy Fail-Safe Logic
+I implemented a **Geometric Fallback Pipeline** to ensure PII destruction even when subjects are occluded or turned away.
+- **Fail-Safe:** Defaults to a "Global Head Blur" if face detection confidence is low.
+- **Tuning:** Utilizes a **99x99 Gaussian Kernel** for forensic-grade, irreversible redaction.
+- **Orchestration:** Python-based coordinate mapping between vehicle localization and plate detection.
