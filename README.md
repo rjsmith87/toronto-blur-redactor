@@ -18,6 +18,14 @@ The redacted payload is processed by the **Austin311Analysis** Prompt Template. 
 
 ---
 
+## 🏗️ Data Engineering & ETL
+To ground the AI Agent in real-world municipal logic, I performed an extensive **Data Normalization** process on the City of Toronto's Open Data portal:
+- **Taxonomy Mapping:** Extracted and cleaned 371 unique Service Request types from raw municipal datasets.
+- **Schema Design:** Architected a custom Salesforce relational model to map public-facing request categories to internal CRM Case types.
+- **Data Integrity:** Conducted a multi-day ETL process to ensure the taxonomy was deduplicated and optimized for Agentforce vector search and grounding.
+
+---
+
 ## Technical Architecture
 
 ### Intelligence Layer (Salesforce)
