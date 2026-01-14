@@ -1,24 +1,42 @@
-# Toronto 311 Privacy-First AI Redactor
+# 🇨🇦 Toronto 311: AI Agent Privacy Wall
+**Architecture:** Multi-Cloud Privacy Pipeline (Heroku + Salesforce Agentforce)
 
-This service acts as a **Privacy Wall** between citizen-submitted media and the Salesforce CRM. It ensures that PII (Faces and License Plates) is destroyed at the source before data storage.
+## Executive Summary
+This project addresses the inherent PII (Personally Identifiable Information) liability in municipal reporting. By implementing a "Privacy Wall" architecture, sensitive biometric data (faces) and vehicle identifiers (license plates) are redacted at the edge before data ingestion into the CRM.
 
-## 🛡️ Privacy & Security
-- **PII Destruction:** Uses OpenCV Gaussian Blur (Kernel 99) via MediaPipe and YOLOv8.
-- **JWT Auth:** Asymmetric RSA-256 token exchange with Salesforce.
-- **Compliance:** Original pixels never hit Salesforce; only redacted ContentVersions are created.
+## Core Innovation: The Privacy Wall
+The architecture utilizes a zero-trust gateway to ensure compliance with data sovereignty and privacy regulations (GDPR/SOC2).
 
-## 📊 Data Engineering & Grounding
-The AI is grounded using official **Toronto 311 Open Data**. 
-- **Taxonomy:** 371 unique Service Request Types.
-- **Transformation:** Python logic used to normalize raw municipal data into the Salesforce `Service_Request_Type__c` schema.
+### 1. Edge Redaction Engine
+A Python-based microservice hosted on Heroku utilizes YOLOv8 and MediaPipe to perform real-time computer vision analysis. 
 
-## 🏗️ Architecture
-- `heroku/`: ML Orchestration Layer.
-- `force-app/`: Salesforce Metadata (Flows, Apex, Objects).
-- `scripts/`: Data transformation logic.
+### 2. Deterministic Geometric Fallback
+A key innovation in this pipeline is the **Geometric Safety Net**. To account for edge cases where AI confidence intervals fall below 0.6, I implemented a deterministic fallback logic. This secondary layer applies a calculated **Gaussian Global Head-Zone Blur** based on image dimensions, ensuring that no PII enters the Salesforce environment even if specific feature detection is obstructed by low lighting or extreme angles.
 
-## 📐 Technical Deep Dive: Privacy Fail-Safe Logic
-I implemented a **Geometric Fallback Pipeline** to ensure PII destruction even when subjects are occluded or turned away.
-- **Fail-Safe:** Defaults to a "Global Head Blur" if face detection confidence is low.
-- **Tuning:** Utilizes a **99x99 Gaussian Kernel** for forensic-grade, irreversible redaction.
-- **Orchestration:** Python-based coordinate mapping between vehicle localization and plate detection.
+### 3. Agentforce Intelligence
+The redacted payload is processed by the **Austin311Analysis** Prompt Template. This allows the AI Agent to perform complex visual categorization against the Toronto 311 taxonomy without exposing the municipality to raw biometric data.
+
+---
+
+## Technical Architecture
+
+### Intelligence Layer (Salesforce)
+| Component | Identifier | Functional Role |
+| :--- | :--- | :--- |
+| **Prompt Template** | Austin311Analysis | Generative Vision & Taxonomy Mapping |
+| **Orchestration Flow** | Analyze_311_Photo_Flow | Multi-Cloud Transaction Management |
+| **Apex REST Handler** | AustinAgentREST.cls | Secure External Data Ingestion |
+| **Apex Grounding** | SearchServiceRequestTypes.cls | Metadata-Driven Query Service |
+| **Custom Object** | Service_Request_Type__c | Municipal Service Taxonomy Schema |
+
+### Privacy Layer (Heroku)
+- **Environment:** Python 3.11
+- **Computer Vision:** OpenCV, MediaPipe, Ultralytics (YOLOv8)
+- **Authentication:** RSA-256 JWT Bearer Tokens
+
+---
+
+## Repository Structure
+- **/heroku**: ML Microservice and Redaction Logic.
+- **/force-app**: Salesforce Metadata (Apex, Flows, Objects, Prompt Templates).
+- **/scripts**: Data Engineering scripts for Toronto Open Data ETL.
