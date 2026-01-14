@@ -1,0 +1,7 @@
+*.key
+*.crt
+__pycache__/
+venv/
+.env
+*.bak
+lwc-temp/

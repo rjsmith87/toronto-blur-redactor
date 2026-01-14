@@ -70,7 +70,7 @@ def upload_image_to_salesforce(image_base64, filename="311_photo.jpg"):
     """Upload image to Salesforce as ContentDocument, return ContentDocumentId."""
     access_token, instance_url = get_sf_access_token()
     
-    url = f"{instance_url}/services/data/v59.0/sobjects/ContentVersion"
+    url = f"{instance_url}/services/data/{os.environ.get('SF_API_VERSION', '62.0')}/sobjects/ContentVersion"
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ def upload_image_to_salesforce(image_base64, filename="311_photo.jpg"):
     content_version_id = resp.json().get('id')
     print(f"✓ Created ContentVersion: {content_version_id}")
     
-    query_url = f"{instance_url}/services/data/v59.0/query"
+    query_url = f"{instance_url}/services/data/{os.environ.get('SF_API_VERSION', '62.0')}/query"
     query = f"SELECT ContentDocumentId FROM ContentVersion WHERE Id = '{content_version_id}'"
     
     resp = requests.get(query_url, headers={'Authorization': f'Bearer {access_token}'}, params={'q': query})
@@ -108,7 +108,7 @@ def invoke_analyze_photo_flow(content_doc_id):
     """Call the Analyze 311 Photo Flow via Salesforce REST API."""
     access_token, instance_url = get_sf_access_token()
     
-    url = f"{instance_url}/services/data/v62.0/actions/custom/flow/Analyze_311_Photo_Flow"
+    url = f"{instance_url}/services/data/{os.environ.get('SF_API_VERSION', '62.0')}/actions/custom/flow/{os.environ.get('SF_PHOTO_FLOW', 'Analyze_311_Photo_Flow')}"
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Content-Type': 'application/json'
@@ -140,7 +140,7 @@ def invoke_create_case_flow(case_data):
     """Call the Create 311 Service Case Flow via Salesforce REST API."""
     access_token, instance_url = get_sf_access_token()
     
-    url = f"{instance_url}/services/data/v62.0/actions/custom/flow/Create_311_Service_Case"
+    url = f"{instance_url}/services/data/{os.environ.get('SF_API_VERSION', '62.0')}/actions/custom/flow/Create_311_Service_Case"
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Content-Type': 'application/json'
@@ -200,8 +200,8 @@ def parse_create_case_block(text):
 mp_face = mp.solutions.face_detection
 face_detector = mp_face.FaceDetection(model_selection=1, min_detection_confidence=0.2)
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "yolov8n.onnx")
-PLATE_MODEL_PATH = os.path.join(os.path.dirname(__file__), "plate_detect.onnx")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "heroku/models/yolov8n.onnx")
+PLATE_MODEL_PATH = os.path.join(os.path.dirname(__file__), "heroku/models/plate_detect.onnx")
 ort_session = None
 plate_session = None
 
