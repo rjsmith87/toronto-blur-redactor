@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>What: This custom setting will be referenced in process automation on platform and will serve as a tool to turn it off.
+
+Who: Built by Jory Dean, December 2022</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>External_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>External ID</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>xDO_Tool_ProcessAutomation__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>WHAT: If true, this will allow all process automation that references this custom setting to be considered during normal transactions in Salesforce
+
+WHO: Built by Jory Dean, December 2022</description>
+        <inlineHelpText>If true, this will allow all process automation that references this custom setting to be considered during normal transactions in Salesforce</inlineHelpText>
+        <label>Process Automation Status</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>xDO - Tool Process Automation Switch</label>
+    <visibility>Public</visibility>
+</CustomObject>

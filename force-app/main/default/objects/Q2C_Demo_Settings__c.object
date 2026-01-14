@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Approver_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Approver Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BaseURL__c</fullName>
+        <label>BaseURL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Company_City__c</fullName>
+        <defaultValue>$Organization.City</defaultValue>
+        <externalId>false</externalId>
+        <label>Company City</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Country__c</fullName>
+        <defaultValue>$Organization.Country</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Country</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Email__c</fullName>
+        <defaultValue>&quot;info@&quot; +  SUBSTITUTE( $Organization.Name , &quot; &quot;, &quot;&quot;) + &quot;.com&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Email</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Fax__c</fullName>
+        <defaultValue>$Organization.Fax</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Fax</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Image_Height__c</fullName>
+        <defaultValue>&quot;40px&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Image Height</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Image_URL__c</fullName>
+        <defaultValue>&quot;https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/nav/salesforce-cloud-logo-sm.png&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Image URL</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Image_Width__c</fullName>
+        <defaultValue>&quot;auto&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Image Width</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Name__c</fullName>
+        <defaultValue>$Organization.Name</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Phone__c</fullName>
+        <defaultValue>$Organization.Phone</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Phone</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Postal_Code__c</fullName>
+        <defaultValue>$Organization.PostalCode</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Postal Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Primary_Color__c</fullName>
+        <defaultValue>&quot;21a0df&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Primary Color</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Slogan__c</fullName>
+        <defaultValue>&quot;Infinity. Beyond.&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Slogan</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_State__c</fullName>
+        <defaultValue>$Organization.State</defaultValue>
+        <externalId>false</externalId>
+        <label>Company State</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Company_Street__c</fullName>
+        <defaultValue>$Organization.Street</defaultValue>
+        <externalId>false</externalId>
+        <label>Company Street</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Credit_Note_Line_Product_Name__c</fullName>
+        <defaultValue>&quot;SLA Credit&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Credit Note Line Product Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DataCannon_Trigger_Disabler__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to disable triggers, workflow rules and process builders that cause errors in the DataCannon</description>
+        <inlineHelpText>Used to disable triggers, workflow rules and process builders that cause errors in the DataCannon</inlineHelpText>
+        <label>DataCannon Trigger Disabler</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Debit_Note_Line_Product_Name__c</fullName>
+        <defaultValue>&quot;Late Fee&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Debit Note Line Product Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Default_Approval_Tier_1__c</fullName>
+        <label>Default Approval Tier 1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Default_Approval_Tier_2__c</fullName>
+        <label>Default Approval Tier 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Default_Approval_Tier_3__c</fullName>
+        <label>Default Approval Tier 3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Delete_Contracted_Prices__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Include Contracted Prices in Deletion</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Discount_Variation__c</fullName>
+        <externalId>false</externalId>
+        <label>Average Discount (%)</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Enforce_PO_Logic__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Enforce Purchase Order Logic</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>External_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This is used to consistently import data to a version of the SDO and translate data into other languages.</description>
+        <externalId>true</externalId>
+        <label>External ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>InitBill__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>InitBill?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Master_Quote__c</fullName>
+        <externalId>false</externalId>
+        <label>Master Quote (Record ID)</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Records__c</fullName>
+        <externalId>false</externalId>
+        <label>Quotes per Month</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Password__c</fullName>
+        <defaultValue>&apos;Benchpre55!&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Approver Password</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Randomize_Discounts__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Randomize Discounts</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Randomize_Quantity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Randomize Quantity</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Randomize_Term__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Randomize Term</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Reporting_End_Date__c</fullName>
+        <label>Reporting End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Reporting_Start_Date__c</fullName>
+        <label>Reporting Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Version__c</fullName>
+        <externalId>false</externalId>
+        <label>Version</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Q2C Demo Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

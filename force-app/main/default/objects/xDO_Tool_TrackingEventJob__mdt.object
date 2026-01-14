@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Tracking Event Jobs</description>
+    <fields>
+        <fullName>Batch_Size__c</fullName>
+        <defaultValue>50</defaultValue>
+        <description>Queueable batch size between 1 and 99. Defaults to 50</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Queueable batch size between 1 and 99. Defaults to 50</inlineHelpText>
+        <label>Batch Size</label>
+        <precision>2</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Client_Type__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <description>Class that extends from SDO_Tool_TrackingEventService.SDO_Tool_TrackingEventClient</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Class that extends from SDO_Tool_TrackingEventService.SDO_Tool_TrackingEventClient</inlineHelpText>
+        <label>Client Type</label>
+        <length>255</length>
+        <required>true</required>
+        <securityClassification>Public</securityClassification>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Entry_Stage__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <description>Entry criteria for the job&apos;s Tracking Event records to be processed</description>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Entry criteria for the job&apos;s Tracking Event records to be processed</inlineHelpText>
+        <label>Entry Stage</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>true</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>Mixpanel Event</fullName>
+                    <default>false</default>
+                    <label>Mixpanel Event</label>
+                </value>
+                <value>
+                    <fullName>Mixpanel Profile</fullName>
+                    <default>false</default>
+                    <label>Mixpanel Profile</label>
+                </value>
+                <value>
+                    <fullName>Processed</fullName>
+                    <default>false</default>
+                    <label>Processed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Exit_Stage__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <description>Exit stage for the job&apos;s Tracking Event records that are successfully processed</description>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Exit stage for the job&apos;s Tracking Event records that are successfully processed</inlineHelpText>
+        <label>Exit Stage</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Mixpanel Event</fullName>
+                    <default>true</default>
+                    <label>Mixpanel Event</label>
+                </value>
+                <value>
+                    <fullName>Mixpanel Profile</fullName>
+                    <default>false</default>
+                    <label>Mixpanel Profile</label>
+                </value>
+                <value>
+                    <fullName>Processed</fullName>
+                    <default>false</default>
+                    <label>Processed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Is_Schedulable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Should the job be scheduled?</description>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Should the job be scheduled?</inlineHelpText>
+        <label>Is Schedulable?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Job_Name__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <description>The scheduled job name.</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>The scheduled job name.</inlineHelpText>
+        <label>Job Name</label>
+        <length>255</length>
+        <required>true</required>
+        <securityClassification>Public</securityClassification>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Notification_Time__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <label>Last Notification Time</label>
+        <required>false</required>
+        <securityClassification>Public</securityClassification>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Named_Credential__c</fullName>
+        <description>Named Credential used by the Client</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Named Credential used by the Client</inlineHelpText>
+        <label>Named Credential</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notification_Emails__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <label>Notification Emails</label>
+        <length>255</length>
+        <required>true</required>
+        <securityClassification>Public</securityClassification>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_Id__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <description>Unique identifier for a target system environment</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Unique identifier for a target system environment</inlineHelpText>
+        <label>Project Id</label>
+        <length>50</length>
+        <required>false</required>
+        <securityClassification>Public</securityClassification>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_Name__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <description>Friendly name identifier for a target system environment</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Friendly name identifier for a target system environment</inlineHelpText>
+        <label>Project Name</label>
+        <length>255</length>
+        <required>false</required>
+        <securityClassification>Public</securityClassification>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_Token__c</fullName>
+        <description>Target system Project Token</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <label>Project Token</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Queueable_Type__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <description>Class that extends from SDO_Tool_QueueableBase</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Class that extends from SDO_Tool_QueueableBase</inlineHelpText>
+        <label>Queueable Type</label>
+        <length>255</length>
+        <required>true</required>
+        <securityClassification>Public</securityClassification>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Schedule_Interval__c</fullName>
+        <defaultValue>5</defaultValue>
+        <description>Job schedule interval in minutes. Recommended value is 5 and must be greater than 3</description>
+        <externalId>false</externalId>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Job schedule interval in minutes. Recommended value is 5 and must be greater than 3</inlineHelpText>
+        <label>Schedule Interval</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>xDO Tool - Tracking Event Job</label>
+    <pluralLabel>xDO Tool - Tracking Event Jobs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

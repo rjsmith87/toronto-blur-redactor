@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>WHAT: Central register that all QBrixes should write to when they&apos;re installed
+        into an xDO.
+        WHO: NextGen Demos Team
+        WHEN: Nov 2021</description>
+    <fields>
+        <fullName>xDO_Content_Type__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Content Type</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Metadata only</fullName>
+                    <default>false</default>
+                    <label>Metadata only</label>
+                </value>
+                <value>
+                    <fullName>Record Data only</fullName>
+                    <default>false</default>
+                    <label>Record Data only</label>
+                </value>
+                <value>
+                    <fullName>Metadata_and_Record_Data</fullName>
+                    <default>false</default>
+                    <label>Metadata and Record Data</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>xDO_Description__c</fullName>
+        <description>WHAT: What this particular QBrix does
+WHO: Kevin Akermanis
+WHEN: Nov 2021</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Description</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>xDO_Documentation_Link__c</fullName>
+        <description>WHAT: URL to QBrix documentation which could include installation, configuration or general QBrix information
+WHO: Kevin Akermanis
+WHEN: Nov 2021</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Documentation Link</label>
+        <required>true</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>xDO_Publisher__c</fullName>
+        <description>WHAT: Name of the QBrix owner/publisher
+WHO: Kevin Akermanis
+WHEN: Nov 2021</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Publisher</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>xDO_Repository_URL__c</fullName>
+        <description>WHAT: Link to the Github/Source Control repository for this QBrix
+WHO: Kevin Akermanis
+WHEN: Nov 2021</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Repository URL</label>
+        <required>true</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>xDO_Type__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Type</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Demo Component</fullName>
+                    <default>false</default>
+                    <label>Demo Component</label>
+                </value>
+                <value>
+                    <fullName>Sales Play</fullName>
+                    <default>false</default>
+                    <label>Sales Play</label>
+                </value>
+                <value>
+                    <fullName>Industry Solution</fullName>
+                    <default>false</default>
+                    <label>Industry Solution</label>
+                </value>
+                <value>
+                    <fullName>End to End Demo</fullName>
+                    <default>false</default>
+                    <label>End to End Demo</label>
+                </value>
+                <value>
+                    <fullName>Data Pack</fullName>
+                    <default>false</default>
+                    <label>Data Pack</label>
+                </value>
+                <value>
+                    <fullName>Localization Pack</fullName>
+                    <default>false</default>
+                    <label>Localization Pack</label>
+                </value>
+                <value>
+                    <fullName>Base xDO Component</fullName>
+                    <default>false</default>
+                    <label>Base xDO Component</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>xDO_Version__c</fullName>
+        <description>WHAT: Version of the QBrix installed
+WHO: Kevin Akermanis
+WHEN: Nov 2021</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Version</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Installed QBrix</label>
+    <listViews>
+        <fullName>All_Installed_QBrix</fullName>
+        <columns>MasterLabel</columns>
+        <columns>xDO_Type__c</columns>
+        <columns>xDO_Publisher__c</columns>
+        <columns>xDO_Version__c</columns>
+        <columns>xDO_Content_Type__c</columns>
+        <columns>xDO_Description__c</columns>
+        <columns>xDO_Documentation_Link__c</columns>
+        <columns>xDO_Repository_URL__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Installed QBrix</label>
+        <language>en_US</language>
+    </listViews>
+    <pluralLabel>Installed QBrixes</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>
