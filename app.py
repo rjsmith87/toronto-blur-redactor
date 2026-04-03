@@ -6,6 +6,7 @@ Auth: JWT Bearer Flow
 """
 
 import base64
+import hmac
 import os
 import re
 import time
@@ -21,6 +22,27 @@ from PIL import Image, ImageOps
 import mediapipe as mp
 
 app = Flask(__name__, static_folder="static", static_url_path="")
+
+# --- API Key Authentication ---
+@app.before_request
+def check_api_key():
+    """Require API key on all endpoints except /health."""
+    api_key = os.environ.get('API_KEY')
+    if not api_key:
+        return  # No API_KEY configured — allow all requests (local dev)
+
+    if request.path == '/health':
+        return  # Health checks are always exempt
+
+    # Accept key via X-API-Key header or Authorization: Bearer <key>
+    provided_key = request.headers.get('X-API-Key', '')
+    if not provided_key:
+        auth_header = request.headers.get('Authorization', '')
+        if auth_header.startswith('Bearer '):
+            provided_key = auth_header[7:]
+
+    if not provided_key or not hmac.compare_digest(provided_key, api_key):
+        return jsonify({"error": "Unauthorized"}), 401
 
 # --- Salesforce JWT Auth ---
 SF_CONSUMER_KEY = os.environ.get('SF_CONSUMER_KEY')

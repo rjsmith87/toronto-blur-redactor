@@ -1006,11 +1006,23 @@
             const userMsg = document.createElement('div');
             userMsg.className = 'message user';
             
-            let userContent = message;
-            if (redactedBase64) {
-                userContent += (message ? '<br>' : '') + '<img src="data:image/jpeg;base64,' + redactedBase64 + '" alt="Uploaded image">';
+            if (message) {
+                const textSpan = document.createElement('span');
+                textSpan.textContent = message;
+                userMsg.appendChild(textSpan);
             }
-            userMsg.innerHTML = userContent || 'Image attached';
+            if (redactedBase64) {
+                if (message) {
+                    userMsg.appendChild(document.createElement('br'));
+                }
+                const img = document.createElement('img');
+                img.src = 'data:image/jpeg;base64,' + redactedBase64;
+                img.alt = 'Uploaded image';
+                userMsg.appendChild(img);
+            }
+            if (!message && !redactedBase64) {
+                userMsg.textContent = 'Image attached';
+            }
             messagesContainer.appendChild(userMsg);
             
             // Clear input
